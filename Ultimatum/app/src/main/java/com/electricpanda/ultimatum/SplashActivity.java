@@ -12,6 +12,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
 
         boolean isItTheFirstLaunch = PreferencesManager.shouldShowAppIntro(mContext);
         if(isItTheFirstLaunch) {

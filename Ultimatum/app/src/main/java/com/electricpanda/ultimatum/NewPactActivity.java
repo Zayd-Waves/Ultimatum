@@ -1,21 +1,21 @@
 package com.electricpanda.ultimatum;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class DashboardActivity extends AppCompatActivity {
+public class NewPactActivity extends AppCompatActivity {
 
-    Button newPactButton;
+    Button createPactButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_new_pact);
 
-        newPactButton = (Button)findViewById(R.id.newPactButton);
-        newPactButton.setOnClickListener(new View.OnClickListener() {
+        createPactButton = (Button)findViewById(R.id.createPactButton);
+        createPactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createPact();
@@ -24,7 +24,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void createPact() {
-        Intent intent = new Intent(this, NewPactActivity.class);
-        startActivity(intent);
+        /* Pact creation logice here. */
+        finish();
     }
 }

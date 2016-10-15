@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
+    tools:context=".NewPactActivity">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -21,24 +21,23 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ListView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/example"
+                    android:text="Example field"
                     android:layout_weight="1"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp" />
 
                 <Button
-                    android:text="New Pact"
+                    android:text="Create Pact"
                     android:layout_weight="0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:id="@+id/newPactButton"
+                    android:id="@+id/createPactButton"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentLeft="true"
