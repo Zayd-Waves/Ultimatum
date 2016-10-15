@@ -23,22 +23,18 @@ public class PreferencesManager {
     private static final Type LIST_TYPE = new TypeToken<ArrayList<Pact>>() {}.getType();
 
 
-    public static void hideAppIntro(Context context) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(PREFS_NAME, context.MODE_PRIVATE).edit();
-        editor.putBoolean("hideAppIntro", true);
-        editor.apply();
-    }
-
-    public static boolean shouldShowAppIntro(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, context.MODE_PRIVATE);
-        /* Should return false by default if there aren't any preferences saved already. */
-        return prefs.getBoolean("hideAppIntro", false);
+    /* Boolean preference that indicates whether or not it's the first launch. */
+    public static SharedPreferences getPreferences(Context context) {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
     public static ArrayList<Pact> loadPacts(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, context.MODE_PRIVATE);
 
         ArrayList<Pact> pacts = new Gson().fromJson(prefs.getString("pactList", ""), LIST_TYPE);
+        if (pacts == null) {
+            pacts = new ArrayList<Pact>();
+        }
         return pacts;
     }
 

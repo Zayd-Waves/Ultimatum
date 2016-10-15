@@ -1,5 +1,6 @@
 package com.electricpanda.ultimatum;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,13 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.electricpanda.ultimatum.misc.CustomSlide;
+import com.electricpanda.ultimatum.misc.PreferencesManager;
 import com.github.paolorotolo.appintro.AppIntro;
 
 public class AppIntroduction extends AppIntro {
+
+    private Context mContext;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //mContext = this;
+        //PreferencesManager.hideAppIntro(mContext);
         addSlide(CustomSlide.newInstance(R.layout.first_slide));
         addSlide(CustomSlide.newInstance(R.layout.second_slide));
 
