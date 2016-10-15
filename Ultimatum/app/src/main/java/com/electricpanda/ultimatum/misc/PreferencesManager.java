@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 
 import com.electricpanda.ultimatum.entities.Pact;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +16,11 @@ import java.util.ArrayList;
  */
 
 public class PreferencesManager {
+
     public static final String PREFS_NAME = "preferences_file";
+
+    /* GSON Constants. */
+    private static final Type LIST_TYPE = new TypeToken<ArrayList<Pact>>() {}.getType();
 
 
     public static void hideAppIntro(Context context) {
@@ -31,9 +37,9 @@ public class PreferencesManager {
 
     public static ArrayList<Pact> loadPacts(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
 
-        return new Gson().fromJson(prefs.getString("pactList", ""), ArrayList.class);
+        ArrayList<Pact> pacts = new Gson().fromJson(prefs.getString("pactList", ""), LIST_TYPE);
+        return pacts;
     }
 
     public static void savePacts(Context context, ArrayList<Pact> pacts){
