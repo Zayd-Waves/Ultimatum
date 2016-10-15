@@ -46,4 +46,15 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    public static String getUsername(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, context.MODE_PRIVATE);
+        return prefs.getString("username", null);
+    }
+
+    public static void setUsername(Context context, String username) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREFS_NAME, context.MODE_PRIVATE).edit();
+        editor.putString("username", username);
+        editor.apply();
+    }
+
 }

@@ -66,7 +66,7 @@ public class PactRecyclerViewAdapter extends
 
         public PactHolder(View view) {
             super(view);
-            pactNameText = (TextView) view.findViewById(R.id.text1);
+            pactNameText = (TextView) view.findViewById(R.id.habitText);
             view.setOnClickListener(this);
         }
 

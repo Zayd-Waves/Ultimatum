@@ -2,26 +2,42 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.electricpanda.ultimatum">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DashboardActivity" />
+        <activity
+            android:name=".DashboardActivity"
+            android:label="Dashboard"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewPactActivity" />
-        <activity android:name=".PactActivity" />
-        <activity android:name=".PactDetailsActivity" />
-        <activity android:name=".AppIntroduction"></activity>
+        <activity
+            android:name=".NewPactActivity"
+            android:label="New Pact"/>
+        <activity
+            android:name=".PactActivity"
+            android:label="Pact Summary"/>
+        <activity
+            android:name=".PactDetailsActivity"
+            android:label="Pact Details"/>
+        <activity android:name=".AppIntroduction" />
+        <activity android:name=".AboutActivity"
+            android:theme="@style/AboutTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

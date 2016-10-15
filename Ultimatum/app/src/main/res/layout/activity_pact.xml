@@ -22,40 +22,62 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <android.support.v4.widget.SwipeRefreshLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/habitText"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/habitText"
-                        android:id="@+id/lengthText"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/lengthText"
-                        android:id="@+id/stakesText"/>
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:clickable="true">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/habitText"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/habitText"
+                                android:id="@+id/lengthText"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/lengthText"
+                                android:id="@+id/stakesText"/>
+
+                        </LinearLayout>
+
+                    </ScrollView>
 
 
-                <Button
-                    android:text="Pact Details"
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+                <TextView
+                    android:id="@+id/minimal_button"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:shadowColor="@color/text_shadow"
+                    android:background="@drawable/minimal_button_background"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="2"
+                    android:text="PACT DETAILS"
+                    android:gravity="center"
                     android:layout_weight="0"
+                    android:layout_height="60dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:id="@+id/pactDetailsButton"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentLeft="true"
@@ -64,7 +86,6 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp" />
-
 
             </LinearLayout>
 

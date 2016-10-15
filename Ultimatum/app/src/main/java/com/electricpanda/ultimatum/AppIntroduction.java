@@ -19,23 +19,22 @@ public class AppIntroduction extends AppIntro {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //mContext = this;
-        //PreferencesManager.hideAppIntro(mContext);
+        mContext = this;
         addSlide(CustomSlide.newInstance(R.layout.first_slide));
-        addSlide(CustomSlide.newInstance(R.layout.second_slide));
+        //addSlide(CustomSlide.newInstance(R.layout.second_slide));
 
     }
 
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        goToDashboard();
+        goToLogin();
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        goToDashboard();
+        goToLogin();
     }
 
     @Override
@@ -45,8 +44,8 @@ public class AppIntroduction extends AppIntro {
     }
 
 
-    private void goToDashboard(){
-        Intent intent = new Intent(this, DashboardActivity.class);
+    private void goToLogin(){
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

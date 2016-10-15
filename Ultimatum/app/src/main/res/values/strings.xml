@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Ultimatum</string>
 
-    <string name="habitFieldHint"><font size="16"><i>E.g. stop smoking, exercise daily</i></font></string>
-    <string name="lengthFieldHint"><font size="16"><i>Enter number of days</i></font></string>
-    <string name="stakesFieldHint"><font size="16"><i>Enter penalty for missing a day</i></font></string>
+    <string name="app_name">Ultimatum</string>
+    <string name="habitFieldHint"><font size="15">Stop smoking, jogging daily, etc.</font></string>
+    <string name="lengthFieldHint"><font size="15">Amount of days to keep this pact going.</font></string>
+    <string name="stakesFieldHint"><font size="15">Amount to be paid if you fail to keep your pact.</font></string>
+
 </resources>
