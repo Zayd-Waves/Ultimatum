@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         NetworkManager.instantiateRequestQueue(this);
 
         SharedPreferences prefs = PreferencesManager.getPreferences(this);
-        if(prefs.getBoolean("firstTime", false) || PreferencesManager.getUsername(mContext) == null) {
+        if(!prefs.getBoolean("firstTime", false) || PreferencesManager.getUsername(mContext) == null) {
             /* It's the first time, the app is being run. Let's introduce things. */
             startAppIntroduction();
         } else {

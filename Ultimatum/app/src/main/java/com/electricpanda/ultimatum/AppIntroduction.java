@@ -21,7 +21,7 @@ public class AppIntroduction extends AppIntro {
 
         mContext = this;
         addSlide(CustomSlide.newInstance(R.layout.first_slide));
-        addSlide(CustomSlide.newInstance(R.layout.second_slide));
+        //addSlide(CustomSlide.newInstance(R.layout.second_slide));
 
     }
 

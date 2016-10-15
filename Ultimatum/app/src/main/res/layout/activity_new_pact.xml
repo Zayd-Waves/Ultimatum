@@ -13,13 +13,13 @@
         android:fillViewport="true" >
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -33,9 +33,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:fontFamily="sans-serif-light"
                         android:id="@+id/habitText"
-                        android:text="Habit"
-                        android:textSize="18sp" />
+                        android:text="Habit"/>
 
                     <EditText
                         android:layout_width="match_parent"
@@ -43,20 +44,23 @@
                         android:inputType="textPersonName"
                         android:ems="10"
                         android:id="@+id/habitField"
+                        android:textSize="15sp"
                         android:hint="@string/habitFieldHint" />
 
                     <TextView
                         android:text="Pact Length"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/lengthText"
-                        android:textSize="18sp" />
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:fontFamily="sans-serif-light"
+                        android:id="@+id/lengthText"/>
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
+                        android:textSize="15sp"
                         android:id="@+id/lengthField"
                         android:hint="@string/lengthFieldHint" />
 
@@ -64,8 +68,9 @@
                         android:text="Stakes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/stakesText"
-                        android:textSize="18sp" />
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:fontFamily="sans-serif-light"
+                        android:id="@+id/stakesText"/>
 
                     <EditText
                         android:layout_width="match_parent"
@@ -73,10 +78,10 @@
                         android:inputType="number"
                         android:ems="16"
                         android:id="@+id/stakesField"
+                        android:textSize="15sp"
                         android:hint="@string/stakesFieldHint" />
 
                 </LinearLayout>
-
 
                 <Button
                     android:text="Create Pact"
@@ -93,7 +98,6 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp" />
-
 
             </LinearLayout>
 
