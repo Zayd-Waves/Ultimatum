@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ContentFrameLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,13 +11,11 @@ import android.widget.TextView;
 import com.electricpanda.ultimatum.entities.Pact;
 import com.electricpanda.ultimatum.misc.AppConstants;
 
-import org.w3c.dom.Text;
-
 public class PactActivity extends AppCompatActivity {
 
     private Pact currentPact;
     private Context mContext;
-    private TextView title, number;
+    private TextView habit, length, stakes;
     private Button pactDetailsButton;
 
     @Override
@@ -28,14 +25,16 @@ public class PactActivity extends AppCompatActivity {
 
         mContext = this;
 
-        title = (TextView) findViewById(R.id.title);
-        number = (TextView) findViewById(R.id.number);
+        habit  = (TextView) findViewById(R.id.habitText);
+        length = (TextView) findViewById(R.id.lengthText);
+        stakes = (TextView) findViewById(R.id.stakesText);
         pactDetailsButton = (Button) findViewById(R.id.pactDetailsButton);
 
-        currentPact = (Pact)getIntent().getSerializableExtra("pact");
+        currentPact = (Pact) getIntent().getSerializableExtra("pact");
+        habit.setText(currentPact.getHabit());
+        length.setText(currentPact.getLength() + "");
+        stakes.setText(currentPact.getStakes() + "");
 
-        title.setText(currentPact.getName());
-        number.setText(currentPact.getDays() + "");
         pactDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

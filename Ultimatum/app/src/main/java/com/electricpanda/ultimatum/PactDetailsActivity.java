@@ -11,7 +11,7 @@ public class PactDetailsActivity extends AppCompatActivity {
 
     private Pact currentPact;
     private Context mContext;
-    private TextView title, number;
+    private TextView habit, length, stakes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +19,14 @@ public class PactDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pact_details);
 
         mContext = this;
-        currentPact = (Pact)getIntent().getSerializableExtra("pact");
+        currentPact = (Pact) getIntent().getSerializableExtra("pact");
 
-        title = (TextView) findViewById(R.id.title);
-        number = (TextView) findViewById(R.id.number);
-        title.setText(currentPact.getName());
-        number.setText(currentPact.getDays() + "");
+        habit = (TextView) findViewById(R.id.habitText);
+        length = (TextView) findViewById(R.id.lengthText);
+        stakes = (TextView) findViewById(R.id.stakesText);
 
+        habit.setText(currentPact.getHabit());
+        length.setText(currentPact.getLength() + "");
+        stakes.setText(currentPact.getStakes() + "");
     }
 }

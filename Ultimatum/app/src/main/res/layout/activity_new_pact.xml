@@ -33,28 +33,47 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/example"
-                        android:text="Name of pact"/>
+                        android:id="@+id/habitText"
+                        android:text="Habit"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/nameEditText" />
+                        android:id="@+id/habitField"
+                        android:hint="@string/habitFieldHint" />
 
                     <TextView
-                        android:text="Number of days"
+                        android:text="Pact Length"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView" />
+                        android:id="@+id/lengthText"
+                        android:textSize="18sp" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/numberEditText" />
+                        android:id="@+id/lengthField"
+                        android:hint="@string/lengthFieldHint" />
+
+                    <TextView
+                        android:text="Stakes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/stakesText"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="16"
+                        android:id="@+id/stakesField"
+                        android:hint="@string/stakesFieldHint" />
 
                 </LinearLayout>
 
