@@ -16,7 +16,7 @@ public class PactActivity extends AppCompatActivity {
     private Pact currentPact;
     private Context mContext;
     private TextView habit, length, stakes;
-    private Button pactDetailsButton;
+    private TextView pactDetailsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class PactActivity extends AppCompatActivity {
         habit  = (TextView) findViewById(R.id.habitText);
         length = (TextView) findViewById(R.id.lengthText);
         stakes = (TextView) findViewById(R.id.stakesText);
-        pactDetailsButton = (Button) findViewById(R.id.pactDetailsButton);
+        pactDetailsButton = (TextView) findViewById(R.id.minimal_button);
 
         currentPact = (Pact) getIntent().getSerializableExtra("pact");
         habit.setText(currentPact.getHabit());

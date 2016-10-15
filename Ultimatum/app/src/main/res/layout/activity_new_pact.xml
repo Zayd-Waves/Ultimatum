@@ -83,13 +83,21 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:text="Create Pact"
+                <TextView
+                    android:id="@+id/minimal_button"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:shadowColor="@color/text_shadow"
+                    android:background="@drawable/minimal_button_background"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="2"
+                    android:text="CREATE"
+                    android:gravity="center"
                     android:layout_weight="0"
+                    android:layout_height="60dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:id="@+id/createPactButton"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentLeft="true"

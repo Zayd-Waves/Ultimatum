@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity implements PactListInteractionListener {
 
-    private Button newPactButton;
+    private TextView newPactButton;
     private static ArrayList<Pact> pactList;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -43,7 +43,7 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
         setContentView(R.layout.activity_dashboard);
 
         mContext = this;
-        newPactButton = (Button)findViewById(R.id.newPactButton);
+        newPactButton = (TextView) findViewById(R.id.minimal_button);
         newPactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
