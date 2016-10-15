@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ContentFrameLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import com.electricpanda.ultimatum.adapters.PactRecyclerViewAdapter;
 import com.electricpanda.ultimatum.entities.Pact;
+import com.electricpanda.ultimatum.interfaces.PactListInteractionListener;
 import com.electricpanda.ultimatum.misc.AppConstants;
 import com.electricpanda.ultimatum.misc.PreferencesManager;
 

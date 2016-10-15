@@ -5,14 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.electricpanda.ultimatum.PactListInteractionListener;
+import com.electricpanda.ultimatum.interfaces.PactListInteractionListener;
 import com.electricpanda.ultimatum.R;
 import com.electricpanda.ultimatum.entities.Pact;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

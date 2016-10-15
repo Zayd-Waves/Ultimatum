@@ -1,4 +1,4 @@
-package com.electricpanda.ultimatum;
+package com.electricpanda.ultimatum.interfaces;
 
 /**
  * Created by Zayd on 10/15/16.

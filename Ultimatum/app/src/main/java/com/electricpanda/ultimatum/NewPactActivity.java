@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.electricpanda.ultimatum.entities.Pact;
 import com.electricpanda.ultimatum.misc.PreferencesManager;
@@ -16,6 +17,8 @@ public class NewPactActivity extends AppCompatActivity {
 
     private Button createPactButton;
     private Context mContext;
+
+    private EditText nameEditText, numberEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +33,16 @@ public class NewPactActivity extends AppCompatActivity {
                 createPact();
             }
         });
+
+        nameEditText = (EditText) findViewById(R.id.nameEditText);
+        numberEditText = (EditText) findViewById(R.id.numberEditText);
     }
 
     private void createPact() {
         /* Pact creation logic here. */
-        Pact pact1 = new Pact("Temp", 7);
-        Pact pact2 = new Pact("Temp", 7);
+        Pact newPact = new Pact(nameEditText.getText().toString(), Integer.parseInt(numberEditText.getText().toString()));
         ArrayList<Pact> pactList = PreferencesManager.loadPacts(mContext);
-        pactList.add(pact1);
-        pactList.add(pact2);
+        pactList.add(newPact);
         PreferencesManager.savePacts(mContext, pactList);
 
         finish();
