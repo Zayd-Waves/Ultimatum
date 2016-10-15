@@ -7,6 +7,10 @@ public class Pact {
     /* More properties to come. */
 
     public Pact() { }
+    public Pact(String n, int d) {
+        name = n;
+        days = d;
+    }
 
     public String getName() {
         return name;
