@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".home.HomeScreen"
+    tools:context=".DashboardActivity"
     xmlns:spread="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_about"

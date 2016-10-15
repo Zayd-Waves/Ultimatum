@@ -24,7 +24,12 @@
         <activity android:name=".PactActivity" />
         <activity android:name=".PactDetailsActivity" />
         <activity android:name=".AppIntroduction" />
-        <activity android:name=".AboutActivity" />
+        <activity android:name=".AboutActivity"
+            android:theme="@style/AboutTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity" />
+        </activity>
         <activity android:name=".LoginActivity"></activity>
     </application>
 

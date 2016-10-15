@@ -1,6 +1,7 @@
 package com.electricpanda.ultimatum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,12 +28,18 @@ public class LoginActivity extends AppCompatActivity {
         mContext = this;
 
         usernameField = (EditText)findViewById(R.id.usernameField);
-        username = usernameField.getText().toString();
         startButton = (Button)findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerOrLoginUser(username);
+                username = usernameField.getText().toString();
+                if (isUsernameValid(username)) {
+                    //registerOrLoginUser(username);
+                    PreferencesManager.setUsername(mContext, username);
+                    goToDashboard();
+                } else {
+                    Toast.makeText(mContext, "Please input a valid username!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -42,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 PreferencesManager.setUsername(mContext, username);
+                goToDashboard();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -49,5 +57,16 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(mContext, "Network error. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public boolean isUsernameValid(String username) {
+        boolean valid = true;
+        if (username.isEmpty()) { valid = false; }
+        return valid;
+    }
+    public void goToDashboard() {
+        Intent intent = new Intent(mContext, DashboardActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
