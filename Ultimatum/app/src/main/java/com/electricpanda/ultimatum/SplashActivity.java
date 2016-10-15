@@ -23,16 +23,13 @@ public class SplashActivity extends AppCompatActivity {
         mContext = this;
 
         SharedPreferences prefs = PreferencesManager.getPreferences(this);
-        if(!prefs.getBoolean("firstTime", false)) {
-
-            /* It's the first time, the app is being run. Let's introduce things. */
-            startAppIntroduction();
-        } else {
-
+        if(prefs.getBoolean("firstTime", false)) {
             /* The user has already been introduced. Let's start the app regularly. */
             startApp();
+        } else {
+            /* It's the first time, the app is being run. Let's introduce things. */
+            startAppIntroduction();
         }
-
     }
 
     private void startAppIntroduction() {

@@ -10,7 +10,6 @@ import android.widget.EditText;
 import com.electricpanda.ultimatum.entities.Pact;
 import com.electricpanda.ultimatum.misc.PreferencesManager;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class NewPactActivity extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class NewPactActivity extends AppCompatActivity {
     private Button createPactButton;
     private Context mContext;
 
-    private EditText nameEditText, numberEditText;
+    private EditText habitField, lengthField, stakesField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +33,19 @@ public class NewPactActivity extends AppCompatActivity {
             }
         });
 
-        nameEditText = (EditText) findViewById(R.id.nameEditText);
-        numberEditText = (EditText) findViewById(R.id.numberEditText);
+        habitField  = (EditText) findViewById(R.id.habitField);
+        lengthField = (EditText) findViewById(R.id.lengthField);
+        stakesField = (EditText) findViewById(R.id.stakesField);
     }
 
+    /* Pact creation logic here. */
     private void createPact() {
-        /* Pact creation logic here. */
-        Pact newPact = new Pact(nameEditText.getText().toString(), Integer.parseInt(numberEditText.getText().toString()));
+        Pact newPact = new Pact(
+                habitField.getText().toString(),
+                Integer.parseInt(lengthField.getText().toString()),
+                Integer.parseInt(stakesField.getText().toString())
+        );
+
         ArrayList<Pact> pactList = PreferencesManager.loadPacts(mContext);
         pactList.add(newPact);
         PreferencesManager.savePacts(mContext, pactList);

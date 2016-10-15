@@ -31,13 +31,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/title"/>
+                        android:id="@+id/habitText"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/title"
-                        android:id="@+id/number"/>
+                        android:layout_below="@+id/habitText"
+                        android:id="@+id/lengthText"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/habitText"
+                        android:id="@+id/stakesText"/>
 
             </LinearLayout>
 

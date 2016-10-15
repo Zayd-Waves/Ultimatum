@@ -4,29 +4,28 @@ import java.io.Serializable;
 
 public class Pact implements Serializable {
 
-    private String name;
-    private int days;
     private String pactId;
-    /* More properties to come. */
+    private String habit;
+    private int length;
+    private int stakes;
 
-    public Pact() { }
-    public Pact(String n, int d) {
-        name = n;
-        days = d;
+    // Constructors
+    private Pact() { }
+    public Pact(String habit, int length, int stakes) {
+        this.habit  = habit;
+        this.length = length;
+        this.stakes = stakes;
     }
 
-    public String getName() {
-        return name;
-    }
-    public int getDays() {
-        return days;
-    }
+    // Getters
+    public String getHabit() { return habit;  }
+    public int getLength()   { return length; }
+    public int getStakes()   { return stakes; }
     public String getPactId() { return pactId; }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setDays(int days) {
-        this.days = days;
-    }
+
+    // Setters
+    public void setHabit(String habit) { this.habit = habit;   }
+    public void setLength(int length)  { this.length = length; }
+    public void setStakes(int stakes)  { this.stakes = stakes; }
     public void setPactId(String pId){ this.pactId = pId; }
 }

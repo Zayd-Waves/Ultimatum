@@ -39,8 +39,8 @@ public class PactRecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(PactHolder holder, int position) {
-        holder.pactName = pacts.get(position).getName();
-        holder.pactNameText.setText(pacts.get(position).getName());
+        holder.pactName = pacts.get(position).getHabit();
+        holder.pactNameText.setText(pacts.get(position).getHabit());
         holder.position = position;
     }
 

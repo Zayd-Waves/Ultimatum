@@ -8,6 +8,4 @@ public class User {
 
     public User(){ }
     public User(String n, String d) {this.name = n; this.id = d;}
-
-    public get
 }
