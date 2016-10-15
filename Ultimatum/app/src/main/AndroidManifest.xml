@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.electricpanda.ultimatum">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -21,7 +23,9 @@
         <activity android:name=".NewPactActivity" />
         <activity android:name=".PactActivity" />
         <activity android:name=".PactDetailsActivity" />
-        <activity android:name=".AppIntroduction"></activity>
+        <activity android:name=".AppIntroduction" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

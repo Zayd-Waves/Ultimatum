@@ -9,6 +9,7 @@ public class Pact implements Serializable {
     private int length;
     private int stakes;
 
+
     // Constructors
     private Pact() { }
     public Pact(String habit, int length, int stakes) {

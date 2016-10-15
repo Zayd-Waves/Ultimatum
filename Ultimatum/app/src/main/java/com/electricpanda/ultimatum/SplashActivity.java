@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.electricpanda.ultimatum.entities.Pact;
+import com.electricpanda.ultimatum.misc.AppUtils;
+import com.electricpanda.ultimatum.misc.NetworkManager;
 import com.electricpanda.ultimatum.misc.PreferencesManager;
 import com.github.paolorotolo.appintro.AppIntro;
 
@@ -21,14 +23,15 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        NetworkManager.instantiateRequestQueue(this);
 
         SharedPreferences prefs = PreferencesManager.getPreferences(this);
-        if(prefs.getBoolean("firstTime", false)) {
-            /* The user has already been introduced. Let's start the app regularly. */
-            startApp();
-        } else {
+        if(prefs.getBoolean("firstTime", false) && PreferencesManager.getUsername(mContext) == null) {
             /* It's the first time, the app is being run. Let's introduce things. */
             startAppIntroduction();
+        } else {
+            /* The user has already been introduced. Let's start the app regularly. */
+            startApp();
         }
     }
 

@@ -28,13 +28,13 @@ public class AppIntroduction extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        goToDashboard();
+        goToLogin();
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        goToDashboard();
+        goToLogin();
     }
 
     @Override
@@ -44,8 +44,8 @@ public class AppIntroduction extends AppIntro {
     }
 
 
-    private void goToDashboard(){
-        Intent intent = new Intent(this, DashboardActivity.class);
+    private void goToLogin(){
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
