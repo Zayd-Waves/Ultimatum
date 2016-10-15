@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".NewPactActivity" />
         <activity android:name=".PactActivity" />
-        <activity android:name=".PactDetailsActivity"></activity>
+        <activity android:name=".PactDetailsActivity" />
+        <activity android:name=".AppIntroduction"></activity>
     </application>
 
 </manifest>
