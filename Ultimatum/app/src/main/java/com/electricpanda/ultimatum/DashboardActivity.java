@@ -55,7 +55,7 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
 
         emptyView = (TextView)findViewById(R.id.empty_view);
         emptyViewContainer = (ScrollView)findViewById(R.id.empty);
-        //refreshEmptyView();
+        refreshEmptyView();
 
     }
 
@@ -71,22 +71,22 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
             mAdapter = new PactRecyclerViewAdapter(pactList, mContext, this);
             recyclerView.setAdapter(mAdapter);
 
-            //refreshEmptyView();
+            refreshEmptyView();
         }
         /* Would add multiple else-if statements if there are multiple requests. */
     }
 
     private void refreshEmptyView() {
-            if (pactList.isEmpty()) {
-                emptyView.setText("No pacts! Click the button below to create one.");
-                recyclerView.setVisibility(View.GONE);
-                emptyView.setVisibility(View.VISIBLE);
-                emptyViewContainer.setVisibility(View.VISIBLE);
-            } else {
-                recyclerView.setVisibility(View.VISIBLE);
-                emptyView.setVisibility(View.GONE);
-                emptyViewContainer.setVisibility(View.GONE);
-            }
+        if (pactList.isEmpty()) {
+            emptyView.setText("No pacts! Click the button below to create one.");
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+            emptyViewContainer.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            emptyViewContainer.setVisibility(View.GONE);
+        }
     }
 
     @Override

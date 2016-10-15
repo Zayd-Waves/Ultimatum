@@ -33,8 +33,6 @@ public class SplashActivity extends AppCompatActivity {
             startApp();
         }
 
-
-
     }
 
     private void startAppIntroduction() {
@@ -43,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("firstTime", true);
         editor.apply();
+
         Intent intent = new Intent(this, AppIntroduction.class);
         startActivity(intent);
         finish();

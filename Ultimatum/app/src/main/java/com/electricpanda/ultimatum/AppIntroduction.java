@@ -19,8 +19,7 @@ public class AppIntroduction extends AppIntro {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //mContext = this;
-        //PreferencesManager.hideAppIntro(mContext);
+        mContext = this;
         addSlide(CustomSlide.newInstance(R.layout.first_slide));
         addSlide(CustomSlide.newInstance(R.layout.second_slide));
 
