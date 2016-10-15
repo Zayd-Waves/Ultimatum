@@ -6,6 +6,6 @@ package com.electricpanda.ultimatum.interfaces;
 
 public interface PactListInteractionListener {
 
-    void onPactListClick();
+    void onPactListClick(int position);
 
 }

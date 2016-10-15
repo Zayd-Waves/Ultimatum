@@ -1,6 +1,8 @@
 package com.electricpanda.ultimatum.entities;
 
-public class Pact {
+import java.io.Serializable;
+
+public class Pact implements Serializable {
 
     private String name;
     private int days;

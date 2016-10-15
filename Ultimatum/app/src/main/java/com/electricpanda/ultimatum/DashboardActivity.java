@@ -90,7 +90,9 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
     }
 
     @Override
-    public void onPactListClick() {
-        Toast.makeText(mContext, "Clicked on a pact.", Toast.LENGTH_SHORT).show();
+    public void onPactListClick(int position) {
+        Intent intent = new Intent(this, PactActivity.class);
+        intent.putExtra("pact", pactList.get(position));
+        startActivityForResult(intent, AppConstants.PACT_ACTIVITY_REQUEST_CODE);
     }
 }

@@ -41,6 +41,7 @@ public class PactRecyclerViewAdapter extends
     public void onBindViewHolder(PactHolder holder, int position) {
         holder.pactName = pacts.get(position).getName();
         holder.pactNameText.setText(pacts.get(position).getName());
+        holder.position = position;
     }
 
     public void addItem(Pact user, int index) {
@@ -61,6 +62,7 @@ public class PactRecyclerViewAdapter extends
     public static class PactHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         String pactName;
         TextView pactNameText;
+        int position;
 
         public PactHolder(View view) {
             super(view);
@@ -71,7 +73,7 @@ public class PactRecyclerViewAdapter extends
         @Override
         public void onClick(View v) {
             if (mListener != null) {
-                mListener.onPactListClick();
+                mListener.onPactListClick(position);
             }
         }
     }
