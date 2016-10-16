@@ -36,7 +36,8 @@ mongodb.MongoClient.connect("mongodb://127.0.0.1:27017/ultimatum", function (err
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
-  res.status(code || 500).json({"error": message});
+  // res.status(code || 500).json({"error": message});
+  res.status(500).json({"error": message});
 }
 
 /*  "/users"
@@ -145,7 +146,7 @@ app.delete("/usersById/:id", function(req, res) {
  *    DELETE: deletes user by id
  */
 
- app.get("/usersByName/:username", function(req, res) {
+app.get("/usersByName/:username", function(req, res) {
    users.findOne({ username: req.params.username }, function(err, doc) {
      if (err) {
        return handleError(res, err.message, "Failed to check if user already exists.");
@@ -163,7 +164,7 @@ app.delete("/usersById/:id", function(req, res) {
    });
  });
 
- app.put("/usersByName/:username", function(req, res) {
+app.put("/usersByName/:username", function(req, res) {
    var updateDoc = req.body;
    delete updateDoc._id;
 
@@ -184,7 +185,7 @@ app.delete("/usersById/:id", function(req, res) {
    });
  });
 
- app.delete("/usersByName/:username", function(req, res) {
+app.delete("/usersByName/:username", function(req, res) {
    users.findOne({ username: req.params.username }, function(err, doc) {
      if (err) {
        return handleError(res, err.message, "Failed to check if user already exists.");
@@ -207,7 +208,7 @@ app.delete("/usersById/:id", function(req, res) {
   *    POST: creates a new user
   */
 
- app.get("/pacts", function(req, res) {
+app.get("/pacts", function(req, res) {
    pacts.find({}).toArray(function(err, docs) {
      if (err) {
        return handleError(res, err.message, "Failed to get all pacts.");
@@ -217,12 +218,11 @@ app.delete("/usersById/:id", function(req, res) {
    });
  });
 
- app.post("/pacts", function(req, res) {
+app.post("/pacts", function(req, res) {
    var newPact = req.body;
    newPact.createDate = new Date();
-   newPact.username2 = null;
 
-   if (!newPact.habit || !newPact.start || !newPact.end || !newPact.length || !newPact.username1 || !newPact.stakes) {
+   if (!newPact.habit || !newPact.start || !newPact.end || !newPact.length || !newPact.stakes || !newPact.users.length >= 2) {
      return handleError(res, "Pact parameters missing", "Pact is missing one or more parameters.", 400);
    }
 
@@ -234,6 +234,18 @@ app.delete("/usersById/:id", function(req, res) {
      }
    });
  });
+
+ app.get("/pacts/:username", function(req, res) {
+    pacts.find({ users: req.params.username }).toArray(function(err, docs) {
+      if (err) {
+        return handleError(res, err.message, "Failed to check for pact");
+      } else if (!docs) {
+        return handleError(res, "Not found", "Pact with specified user not found.", 400);
+      }
+
+      res.status(200).json(docs);
+    });
+  });
 
  /*  "/ping"
   *    GET: check if the API is up.
