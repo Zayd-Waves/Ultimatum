@@ -98,6 +98,17 @@ public class PactActivity extends AppCompatActivity {
                 todayText.setText("Thanks for being so honest :)!");
                 myEntryButton1.setVisibility(View.GONE);
                 myEntryButton2.setVisibility(View.GONE);
+                NetworkManager.updatePacts(currentPact, mContext, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
             }
         });
         friendEntryButton1.setOnClickListener(new View.OnClickListener() {
@@ -105,21 +116,43 @@ public class PactActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String[] temp = currentPact.getSecondEntry();
                 temp[(int)dayNumber] = "success";
-                currentPact.setFirstEntry(temp);
+                currentPact.setSecondEntry(temp);
                 friendText.setText("Thanks for being so honest :)!");
                 friendEntryButton1.setVisibility(View.GONE);
                 friendEntryButton2.setVisibility(View.GONE);
+                NetworkManager.updatePacts(currentPact, mContext, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
             }
         });
         friendEntryButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String[] temp = currentPact.getSecondEntry();
-                temp[(int)dayNumber] = "failure";
-                currentPact.setFirstEntry(temp);
+                temp[(int)dayNumber] = "fail";
+                currentPact.setSecondEntry(temp);
                 friendText.setText("Thanks for being so honest :)!");
                 friendEntryButton1.setVisibility(View.GONE);
                 friendEntryButton2.setVisibility(View.GONE);
+                NetworkManager.updatePacts(currentPact, mContext, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
             }
         });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -158,13 +191,38 @@ public class PactActivity extends AppCompatActivity {
 
             if (todayStatusOneself.equals("empty")) {
                 todayText.setText("How did you do today? Did you follow the pact?");
+            } else if (todayStatusOneself.equals("pending")) {
+                todayText.setText("Wait for your friend to verify!");
+                myEntryButton1.setVisibility(View.GONE);
+                myEntryButton2.setVisibility(View.GONE);
+            }  else if (todayStatusOneself.equals("success")) {
+                todayText.setText("You did great today! Can't wait for tomorrow :)");
+                myEntryButton1.setVisibility(View.GONE);
+                myEntryButton2.setVisibility(View.GONE);
+            } else if (todayStatusOneself.equals("fail")) {
+                todayText.setText("Darn, try again tomorrow? :(");
+                myEntryButton1.setVisibility(View.GONE);
+                myEntryButton2.setVisibility(View.GONE);
             } else {
+                todayText.setText("Oh this shouldn't happen.");
                 myEntryButton1.setVisibility(View.GONE);
                 myEntryButton2.setVisibility(View.GONE);
             }
 
             if (todayStatusPartner.equals("pending")) {
                 friendText.setText("How did your partner do?");
+            } else if (todayStatusPartner.equals("success")) {
+                friendText.setText("Your friend succeeded! Hooray!");
+                friendEntryButton1.setVisibility(View.GONE);
+                friendEntryButton2.setVisibility(View.GONE);
+            } else if (todayStatusPartner.equals("fail")) {
+                friendText.setText("Your friend failed today :(");
+                friendEntryButton1.setVisibility(View.GONE);
+                friendEntryButton2.setVisibility(View.GONE);
+            } else if (todayStatusPartner.equals("empty")) {
+                friendText.setText("Looks like your friend hasn't answered yet...");
+                friendEntryButton1.setVisibility(View.GONE);
+                friendEntryButton2.setVisibility(View.GONE);
             } else {
                 friendEntryButton1.setVisibility(View.GONE);
                 friendEntryButton2.setVisibility(View.GONE);
