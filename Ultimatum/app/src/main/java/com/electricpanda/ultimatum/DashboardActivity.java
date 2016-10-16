@@ -34,7 +34,7 @@ import java.util.ArrayList;
 public class DashboardActivity extends AppCompatActivity implements PactListInteractionListener {
 
     private TextView newPactButton;
-    private static ArrayList<Pact> pactList;
+    private static ArrayList<Pact> pactList = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private Context mContext;
@@ -58,17 +58,13 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
             }
         });
 
-        pactList = PreferencesManager.loadPacts(mContext);
-
-        mAdapter = new PactRecyclerViewAdapter(pactList, mContext, this);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdapter);
 
         emptyView = (TextView)findViewById(R.id.empty_view);
         emptyViewContainer = (ScrollView)findViewById(R.id.empty);
-        refreshEmptyView();
+
 
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -77,6 +73,8 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
                 fetchPacts();
             }
         });
+        fetchPacts();
+        refreshEmptyView();
     }
 
     private void fetchPacts() {
@@ -84,25 +82,29 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
             @Override
             public void onResponse(JSONArray response) {
                 JSONObject pact = new JSONObject();
-                String[] arr = null;
+                ArrayList<String> arr = null;
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         pact = (JSONObject)response.get(i);
                         JSONArray arrJson = pact.getJSONArray("users");
-                        Toast.makeText(mContext, arrJson + "", Toast.LENGTH_SHORT).show();
-                        arr = new String[arrJson.length()];
+                        arr = new ArrayList<String>();
                         for(int j = 0; j<arrJson.length(); j++)
-                            arr[j] = arrJson.getString(j);
+                            arr.add(arrJson.getString(j));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Pact p = new Pact(  pact.optString("habit"),
+                    Pact p = new Pact(
+                            pact.optString("habit"),
                             AppUtils.convertStringToDate(pact.optString("start")),
                             AppUtils.convertStringToDate(pact.optString("end")),
                             pact.optInt("length"),
                             pact.optInt("stakes"));
                     p.setUsers(arr);
+                    pactList.add(p);
                 }
+                mAdapter = new PactRecyclerViewAdapter(pactList, mContext, (PactListInteractionListener)mContext);
+                recyclerView.setAdapter(mAdapter);
+                refreshEmptyView();
                 swipeRefreshLayout.setRefreshing(false);
             }
         }, new Response.ErrorListener() {
@@ -126,6 +128,7 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
             mAdapter = new PactRecyclerViewAdapter(pactList, mContext, this);
             recyclerView.setAdapter(mAdapter);
 
+            fetchPacts();
             refreshEmptyView();
         }
         /* Would add multiple else-if statements if there are multiple requests. */
@@ -133,7 +136,7 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
 
     private void refreshEmptyView() {
         if (pactList.isEmpty()) {
-            emptyView.setText("No pacts! Click the button below to create one.");
+            emptyView.setText("No pacts! Click the button below to create one, or swipe down to refresh.");
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
             emptyViewContainer.setVisibility(View.VISIBLE);

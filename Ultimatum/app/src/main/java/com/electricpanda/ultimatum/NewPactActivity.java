@@ -70,8 +70,8 @@ public class NewPactActivity extends AppCompatActivity {
             int month2 = endDate.getMonth();
             int year2 = endDate.getYear();
             Calendar calendar2 = Calendar.getInstance();
-            calendar.set(year, month, day);
-            Date end = calendar.getTime();
+            calendar.set(year2, month2, day2);
+            Date end = calendar2.getTime();
 
             String habit = habitField.getText().toString();
             int length = day2 - day;
@@ -108,6 +108,10 @@ public class NewPactActivity extends AppCompatActivity {
     private boolean isFormValid() {
         boolean valid = true;
         if (partnerField.getText().toString().equals("")) {
+            valid = false;
+        } else if (stakesField.getText().toString().equals("") || Integer.parseInt(stakesField.getText().toString()) == 0) {
+            valid = false;
+        } else if (habitField.getText().toString().equals("")) {
             valid = false;
         }
         return valid;
