@@ -17,14 +17,15 @@
         android:layout_height="match_parent">
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_weight="1"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
@@ -35,6 +36,8 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:fontFamily="sans-serif-light"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
                         android:id="@+id/habitText"
                         android:text="Habit"/>
 
@@ -48,21 +51,38 @@
                         android:hint="@string/habitFieldHint" />
 
                     <TextView
-                        android:text="Pact Length"
+                        android:text="Start Date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:fontFamily="sans-serif-light"
-                        android:id="@+id/lengthText"/>
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:id="@+id/startDateText"/>
 
-                    <EditText
+                    <DatePicker
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/startDateField"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp" />
+
+                    <TextView
+                        android:text="End Date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:textSize="15sp"
-                        android:id="@+id/lengthField"
-                        android:hint="@string/lengthFieldHint" />
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:id="@+id/endDateText"/>
+
+                    <DatePicker
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/endDateField"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp" />
 
                     <TextView
                         android:text="Stakes"
@@ -70,6 +90,8 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:fontFamily="sans-serif-light"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
                         android:id="@+id/stakesText"/>
 
                     <EditText
@@ -78,6 +100,25 @@
                         android:inputType="number"
                         android:ems="16"
                         android:id="@+id/stakesField"
+                        android:textSize="15sp"
+                        android:hint="@string/stakesFieldHint" />
+
+                    <TextView
+                        android:text="Partner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:id="@+id/partnerText"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="16"
+                        android:id="@+id/partnerTextField"
                         android:textSize="15sp"
                         android:hint="@string/stakesFieldHint" />
 

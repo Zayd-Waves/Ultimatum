@@ -12,24 +12,55 @@ public class Pact implements Serializable {
     private int length;
     private int stakes;
 
-
     // Constructors
     private Pact() { }
-    public Pact(String habit, int length, int stakes) {
+    public Pact(String pId, String habit, Date start, Date end, int length, int stakes) {
+        this.pactId = pId;
         this.habit  = habit;
+        this.startDate = start;
+        this.endDate = end;
         this.length = length;
         this.stakes = stakes;
     }
 
     // Getters
-    public String getHabit() { return habit;  }
-    public int getLength()   { return length; }
-    public int getStakes()   { return stakes; }
-    public String getPactId() { return pactId; }
+    public String getPactId() {
+        return pactId;
+    }
+    public String getHabit() {
+        return habit;
+    }
+    public Date getStartDate() {
+        return startDate;
+    }
+    public Date getEndDate() {
+        return endDate;
+    }
+    public int getLength() {
+        return length;
+    }
+    public int getStakes() {
+        return stakes;
+    }
 
     // Setters
-    public void setHabit(String habit) { this.habit = habit;   }
-    public void setLength(int length)  { this.length = length; }
-    public void setStakes(int stakes)  { this.stakes = stakes; }
-    public void setPactId(String pId){ this.pactId = pId; }
+    public void setPactId(String pactId) {
+        this.pactId = pactId;
+    }
+    public void setHabit(String habit) {
+        this.habit = habit;
+    }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    public void setLength(int length) {
+        this.length = length;
+    }
+    public void setStakes(int stakes) {
+        this.stakes = stakes;
+    }
+
 }

@@ -17,7 +17,7 @@ import java.util.Map;
 public class NetworkManager {
 
     private static final String     ping = "http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/ping";
-    private static final String     registerUrl = "";
+    private static final String     registerUrl = "http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/users";
 
     private static RequestQueue mRequestQueue;
     private static Context mContext;

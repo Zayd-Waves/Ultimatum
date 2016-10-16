@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -14,10 +15,12 @@ import com.android.volley.VolleyError;
 import com.electricpanda.ultimatum.misc.NetworkManager;
 import com.electricpanda.ultimatum.misc.PreferencesManager;
 
+import org.w3c.dom.Text;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameField;
-    private Button startButton;
+    private TextView startButton;
     private Context mContext;
     private String username;
 
@@ -28,15 +31,13 @@ public class LoginActivity extends AppCompatActivity {
         mContext = this;
 
         usernameField = (EditText)findViewById(R.id.usernameField);
-        startButton = (Button)findViewById(R.id.startButton);
+        startButton = (TextView) findViewById(R.id.minimal_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 username = usernameField.getText().toString();
                 if (isUsernameValid(username)) {
-                    //registerOrLoginUser(username);
-                    PreferencesManager.setUsername(mContext, username);
-                    goToDashboard();
+                    registerOrLoginUser(username);
                 } else {
                     Toast.makeText(mContext, "Please input a valid username!", Toast.LENGTH_SHORT).show();
                 }
@@ -49,12 +50,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 PreferencesManager.setUsername(mContext, username);
+                Toast.makeText(mContext, "Welcome " + username, Toast.LENGTH_SHORT).show();
                 goToDashboard();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Network error. Please check your internet connection and try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Network error. Please check your internet connection and try again. error", Toast.LENGTH_SHORT).show();
             }
         });
     }
