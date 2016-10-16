@@ -2,40 +2,40 @@ API Examples
 ------------
 
 GET /users
-curl -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/users/
+curl -H "Content-Type: application/json" ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/users/
 
 POST /users
-curl -H "Content-Type: application/json" -d '{"username":"Khalid"}' http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/users
+curl -H "Content-Type: application/json" -d '{"username":"Khalid"}' ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/users
 
 ----------------------------------------------------------------------------------------------------
 
 GET /usersById/:id
-curl -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersById/58029b0015bef672cab00da6
+curl -H "Content-Type: application/json" ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersById/58029b0015bef672cab00da6
 
 PUT /usersById/:id
-curl -X PUT -H "Content-Type: application/json" -d '{"username":"Johnny", "pacts": [], "createDate": "olddateformat"}' http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersById/58029b0015bef672cab00da6
+curl -X PUT -H "Content-Type: application/json" -d '{"username":"Johnny", "pacts": [], "createDate": "olddateformat"}' ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersById/58029b0015bef672cab00da6
 
 DELETE /usersById/:id
-curl -X DELETE -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersById/58029b0015bef672cab00da6
+curl -X DELETE -H "Content-Type: application/json" ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersById/58029b0015bef672cab00da6
 
 ----------------------------------------------------------------------------------------------------
 
 GET /usersByName/:username
-curl -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersByName/Khalid
+curl -H "Content-Type: application/json" ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersByName/Khalid
 
 PUT /usersByName/:username
-curl -X PUT -H "Content-Type: application/json" -d '{"username":"newUsername", "pacts": [], "createDate": "sameOldCreateDate"}' http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersByName/Khalid
+curl -X PUT -H "Content-Type: application/json" -d '{"username":"newUsername", "pacts": [], "createDate": "sameOldCreateDate"}' ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersByName/Khalid
 
 DELETE /usersByName/:username
-curl -X DELETE -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersByName/Khalid
+curl -X DELETE -H "Content-Type: application/json" ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersByName/Khalid
 
 ----------------------------------------------------------------------------------------------------
 
 GET /pacts
-curl -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts/
+curl -H "Content-Type: application/json" ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts/
 
 POST /pacts
-curl -H "Content-Type: application/json" -d '{"habit":"Apply Sunscreen", "start":"today", "end":"tomorrow", "length": 1, "users":["Khalid", "Zayd"], "stakes": 50}' http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts
+curl -H "Content-Type: application/json" -d '{"habit":"Apply Sunscreen", "start":"today", "end":"tomorrow", "length": 1, "users":["Khalid", "Zayd"], "stakes": 50}' ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts
 
 GET /pacts/:username
-curl -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts/Khalid
+curl -H "Content-Type: application/json" ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts/Khalid
