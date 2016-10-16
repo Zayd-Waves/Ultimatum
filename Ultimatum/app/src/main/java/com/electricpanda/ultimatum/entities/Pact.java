@@ -1,11 +1,14 @@
 package com.electricpanda.ultimatum.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Pact implements Serializable {
 
     private String pactId;
     private String habit;
+    private Date startDate;
+    private Date endDate;
     private int length;
     private int stakes;
 
