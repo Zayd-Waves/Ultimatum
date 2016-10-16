@@ -141,9 +141,9 @@ app.delete("/usersById/:id", function(req, res) {
 });
 
 /*  "/usersByName/:username"
- *    GET: find user by id
- *    PUT: update user by id
- *    DELETE: deletes user by id
+ *    GET: find user by username
+ *    PUT: update user by username
+ *    DELETE: deletes user by username
  */
 
 app.get("/usersByName/:username", function(req, res) {
@@ -205,7 +205,8 @@ app.delete("/usersByName/:username", function(req, res) {
 
  /*  "/pacts"
   *    GET: finds all pacts
-  *    POST: creates a new user
+  *    POST: creates a new pact
+  *    PUT: updates a pact
   */
 
 app.get("/pacts", function(req, res) {
@@ -221,9 +222,16 @@ app.get("/pacts", function(req, res) {
 app.post("/pacts", function(req, res) {
    var newPact = req.body;
    newPact.createDate = new Date();
+   newPact.balance = 0;
+   newPact.leader = "";
+   newPact.allEntries = [];
+
+   newPact.users.forEach(function(user, index) {
+     newPact.allEntries[index] = {"username": user, "entries": new Array(newPact.length).fill("empty") };
+   });
 
    if (!newPact.habit || !newPact.start || !newPact.end || !newPact.length || !newPact.stakes || !newPact.users.length >= 2) {
-     return handleError(res, "Pact parameters missing", "Pact is missing one or more parameters.", 400);
+     return handleError(res, "Pact parameters missing", "Create failed - pact is missing one or more parameters.", 400);
    }
 
    pacts.insertOne(newPact, function(err, doc) {
@@ -234,6 +242,76 @@ app.post("/pacts", function(req, res) {
      }
    });
  });
+
+ app.put("/pacts/:id", function(req, res) {
+   var updateDoc = req.body;
+   delete updateDoc._id;
+
+   if (!updateDoc.habit                   ||
+        !updateDoc.start                  ||
+        !updateDoc.end                    ||
+        !updateDoc.length                 ||
+        !updateDoc.stakes                 ||
+        !updateDoc.createDate             ||
+        !updateDoc.allEntries[0].username ||
+        !updateDoc.allEntries[1].username) {
+     return handleError(res, "Pact parameters missing", "Update failed - pact is missing one or more parameters.", 400);
+   }
+
+   if (updateDoc.users.length < 2 || updateDoc.allEntries.length < 2) {
+     return handleError(res, "Pact parameters missing", "Update failed - pact must have two or more users.", 400);
+   }
+
+   if (updateDoc.length != updateDoc.allEntries[0].entries.length ||
+        updateDoc.length != updateDoc.allEntries[1].entries.length) {
+     return handleError(res, "Pact parameters missing", "Update failed - entries array size mismatch.", 400);
+   }
+
+   pacts.findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+     if (err) {
+       return handleError(res, err.message, "Failed to check the requested pact.");
+     } else if (!doc) {
+       return handleError(res, "Invalid pact ID", "Pact with that ID does not exist.", 400);
+     }
+
+     var numFailuresUser1 = 0;
+     updateDoc.allEntries[0].entries.forEach(function(entry) {
+       if (entry == "fail") {
+         numFailuresUser1++;
+       }
+     });
+
+     var numFailuresUser2 = 0;
+     updateDoc.allEntries[1].entries.forEach(function(entry) {
+       if (entry == "fail") {
+         numFailuresUser2++;
+       }
+     });
+
+     if (numFailuresUser1 < numFailuresUser2) {
+       updateDoc.leader = updateDoc.allEntries[0].username;
+       updateDoc.balance = (numFailuresUser2 - numFailuresUser1) * updateDoc.stakes;
+     } else if (numFailuresUser1 > numFailuresUser2) {
+       updateDoc.leader = updateDoc.allEntries[1].username;
+       updateDoc.balance = (numFailuresUser1 - numFailuresUser2) * updateDoc.stakes;
+     } else {
+       updateDoc.leader = "";
+       updateDoc.balance = 0;
+     }
+
+     pacts.updateOne({ _id: new ObjectID(req.params.id) }, updateDoc, function(err, doc) {
+       if (err) {
+         return handleError(res, err.message, "Failed to update pact");
+       } else {
+         res.status(204).end();
+       }
+     });
+   });
+ });
+
+ /*  "/pacts/:id"
+  *    GET: find all pacts with a specific username
+  */
 
  app.get("/pacts/:username", function(req, res) {
     pacts.find({ users: req.params.username }).toArray(function(err, docs) {
