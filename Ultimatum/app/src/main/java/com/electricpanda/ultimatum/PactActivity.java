@@ -93,7 +93,7 @@ public class PactActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String[] temp = currentPact.getFirstEntry();
-                temp[(int)dayNumber] = "failure";
+                temp[(int)dayNumber] = "fail";
                 currentPact.setFirstEntry(temp);
                 todayText.setText("Thanks for being so honest :)!");
                 myEntryButton1.setVisibility(View.GONE);
