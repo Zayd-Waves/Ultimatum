@@ -44,7 +44,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
+                        android:inputType="textCapWords"
                         android:ems="10"
                         android:id="@+id/habitField"
                         android:textSize="15sp"
@@ -116,7 +116,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
+                        android:inputType="textPersonName"
                         android:ems="16"
                         android:id="@+id/partnerTextField"
                         android:textSize="15sp"

@@ -2,6 +2,7 @@ package com.electricpanda.ultimatum;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,8 +21,13 @@ import com.electricpanda.ultimatum.adapters.PactRecyclerViewAdapter;
 import com.electricpanda.ultimatum.entities.Pact;
 import com.electricpanda.ultimatum.interfaces.PactListInteractionListener;
 import com.electricpanda.ultimatum.misc.AppConstants;
+import com.electricpanda.ultimatum.misc.AppUtils;
 import com.electricpanda.ultimatum.misc.NetworkManager;
 import com.electricpanda.ultimatum.misc.PreferencesManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -36,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView emptyView;
     private ScrollView emptyViewContainer;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,7 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
         });
 
         pactList = PreferencesManager.loadPacts(mContext);
+
         mAdapter = new PactRecyclerViewAdapter(pactList, mContext, this);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this);
@@ -61,6 +69,49 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
         emptyView = (TextView)findViewById(R.id.empty_view);
         emptyViewContainer = (ScrollView)findViewById(R.id.empty);
         refreshEmptyView();
+
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchPacts();
+            }
+        });
+    }
+
+    private void fetchPacts() {
+        NetworkManager.getPacts(mContext, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject pact = new JSONObject();
+                String[] arr = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        pact = (JSONObject)response.get(i);
+                        JSONArray arrJson = pact.getJSONArray("users");
+                        Toast.makeText(mContext, arrJson + "", Toast.LENGTH_SHORT).show();
+                        arr = new String[arrJson.length()];
+                        for(int j = 0; j<arrJson.length(); j++)
+                            arr[j] = arrJson.getString(j);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Pact p = new Pact(  pact.optString("habit"),
+                            AppUtils.convertStringToDate(pact.optString("start")),
+                            AppUtils.convertStringToDate(pact.optString("end")),
+                            pact.optInt("length"),
+                            pact.optInt("stakes"));
+                    p.setUsers(arr);
+                }
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, "Network error.", Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void createPact() {

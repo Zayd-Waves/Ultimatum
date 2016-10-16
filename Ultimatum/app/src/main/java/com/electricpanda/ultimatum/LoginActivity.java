@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.electricpanda.ultimatum.misc.NetworkManager;
 import com.electricpanda.ultimatum.misc.PreferencesManager;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
@@ -46,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void registerOrLoginUser(final String username) {
-        NetworkManager.registerUser(username, new Response.Listener<String>() {
+        NetworkManager.registerUser(username, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
                 PreferencesManager.setUsername(mContext, username);
                 Toast.makeText(mContext, "Welcome " + username, Toast.LENGTH_SHORT).show();
                 goToDashboard();
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Network error. Please check your internet connection and try again. error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Network error. Please check your internet connection and try again." + error, Toast.LENGTH_SHORT).show();
             }
         });
     }

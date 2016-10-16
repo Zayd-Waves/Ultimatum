@@ -1,5 +1,10 @@
 package com.electricpanda.ultimatum.misc;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AppUtils {
 
     public static String generateUserId() {
@@ -36,5 +41,26 @@ public class AppUtils {
             result.append(letters[(int)Math.floor(Math.random() * 26)]);
         }
         return result.toString();
+    }
+
+    public static String convertDateToString(Date date) {
+        String dateString = "";
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
+        dateString = dateFormat.format(date);
+
+        return dateString;
+    }
+
+    public static Date convertStringToDate(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return convertedDate;
     }
 }
