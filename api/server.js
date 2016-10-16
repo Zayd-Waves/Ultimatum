@@ -28,11 +28,11 @@ mongodb.MongoClient.connect("mongodb://127.0.0.1:27017/ultimatum", function (err
   // Initialize the app.
   var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
-    console.log("App now running on port", port);
+    console.log("Ultimatum API now running on port", port);
   });
 });
 
-// CONTACTS API ROUTES BELOW
+// API ROUTES BELOW
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
@@ -47,7 +47,7 @@ function handleError(res, reason, message, code) {
 app.get("/users", function(req, res) {
   users.find({}).toArray(function(err, docs) {
     if (err) {
-      return handleError(res, err.message, "Failed to get users.");
+      return handleError(res, err.message, "Failed to get all users.");
     } else {
       res.status(200).json(docs);
     }
@@ -59,7 +59,7 @@ app.post("/users", function(req, res) {
   newUser.pacts = [];
   newUser.createDate = new Date();
 
-  if (!req.body.username) {
+  if (!newUser.username) {
     return handleError(res, "Invalid user input", "Username must not be empty.", 400);
   }
 
@@ -199,6 +199,39 @@ app.delete("/usersById/:id", function(req, res) {
          res.status(204).end();
        }
      });
+   });
+ });
+
+ /*  "/pacts"
+  *    GET: finds all pacts
+  *    POST: creates a new user
+  */
+
+ app.get("/pacts", function(req, res) {
+   pacts.find({}).toArray(function(err, docs) {
+     if (err) {
+       return handleError(res, err.message, "Failed to get all pacts.");
+     } else {
+       res.status(200).json(docs);
+     }
+   });
+ });
+
+ app.post("/pacts", function(req, res) {
+   var newPact = req.body;
+   newPact.createDate = new Date();
+   newPact.username2 = null;
+
+   if (!newPact.habit || !newPact.start || !newPact.end || !newPact.length || !newPact.username1 || !newPact.stakes) {
+     return handleError(res, "Pact parameters missing", "Pact is missing one or more parameters.", 400);
+   }
+
+   pacts.insertOne(newPact, function(err, doc) {
+     if (err) {
+       return handleError(res, err.message, "Failed to create new pact.");
+     } else {
+       res.status(201).json(doc.ops[0]);
+     }
    });
  });
 
