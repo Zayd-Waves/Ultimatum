@@ -43,14 +43,14 @@ public class PactActivity extends AppCompatActivity {
 
         if (currentPact.getEndDate().before(today)) {
             message.setText("Woah! It looks like this pact is already done! Why not try starting another one?");
+        } else if (today.before(currentPact.getStartDate())) {
+            message.setText("This pact hasn't started yet!");
         } else {
             long diff = currentPact.getEndDate().getTime() - today.getTime();
             long daysLeft = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
             message.setText(daysLeft + " day(s) left go!");
         }
-
-        length.setText(currentPact.getLength() + "");
-        stakes.setText(currentPact.getStakes() + "");
+        stakes.setText("The winner of this pact will be receiving $" + currentPact.getStakes() + " paid by the loser.");
 
         pactDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
