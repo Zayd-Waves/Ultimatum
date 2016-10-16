@@ -23,3 +23,9 @@ curl -X PUT -H "Content-Type: application/json" -d '{"username":"newUsername", "
 
 DELETE /usersByName/:username
 curl -X DELETE -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/usersByName/Khalid
+
+GET /pacts
+curl -H "Content-Type: application/json" http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts/
+
+POST /pacts
+curl -H "Content-Type: application/json" -d '{"habit":"Stop Smoking", "start":"today", "end":"tomorrow", "length": 1, "username1":"Khalid", "stakes": 50}' http://ec2-52-38-253-207.us-west-2.compute.amazonaws.com:8080/pacts
