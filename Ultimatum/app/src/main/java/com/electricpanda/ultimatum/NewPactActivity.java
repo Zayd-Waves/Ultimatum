@@ -54,6 +54,7 @@ public class NewPactActivity extends AppCompatActivity {
         partnerField = (EditText) findViewById(R.id.partnerTextField);
         startDate = (DatePicker) findViewById(R.id.startDateField);
         endDate = (DatePicker) findViewById(R.id.endDateField);
+
     }
 
     /* Pact creation logic here. */
