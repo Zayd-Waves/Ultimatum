@@ -11,11 +11,15 @@ import android.widget.TextView;
 import com.electricpanda.ultimatum.entities.Pact;
 import com.electricpanda.ultimatum.misc.AppConstants;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 public class PactActivity extends AppCompatActivity {
 
     private Pact currentPact;
     private Context mContext;
-    private TextView habit, length, stakes;
+    private TextView habit, length, stakes, message;
     private TextView pactDetailsButton;
 
     @Override
@@ -28,10 +32,23 @@ public class PactActivity extends AppCompatActivity {
         habit  = (TextView) findViewById(R.id.habitText);
         length = (TextView) findViewById(R.id.lengthText);
         stakes = (TextView) findViewById(R.id.stakesText);
+        message = (TextView) findViewById(R.id.messageText);
         pactDetailsButton = (TextView) findViewById(R.id.minimal_button);
 
         currentPact = (Pact) getIntent().getSerializableExtra("pact");
-        habit.setText(currentPact.getHabit());
+        habit.setText("The \"" + currentPact.getHabit() + "\" Pact");
+
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+
+        if (currentPact.getEndDate().before(today)) {
+            message.setText("Woah! It looks like this pact is already done! Why not try starting another one?");
+        } else {
+            long diff = currentPact.getEndDate().getTime() - today.getTime();
+            long daysLeft = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            message.setText(daysLeft + " day(s) left go!");
+        }
+
         length.setText(currentPact.getLength() + "");
         stakes.setText(currentPact.getStakes() + "");
 
