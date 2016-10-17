@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class NewPactActivity extends AppCompatActivity {
 
     private TextView createPactButton;
@@ -31,6 +33,7 @@ public class NewPactActivity extends AppCompatActivity {
 
     private EditText habitField, stakesField, partnerField;
     private DatePicker startDate, endDate;
+    private String errorMessage = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class NewPactActivity extends AppCompatActivity {
         partnerField = (EditText) findViewById(R.id.partnerTextField);
         startDate = (DatePicker) findViewById(R.id.startDateField);
         endDate = (DatePicker) findViewById(R.id.endDateField);
+
     }
 
     /* Pact creation logic here. */
@@ -58,7 +62,7 @@ public class NewPactActivity extends AppCompatActivity {
 
         if (isFormValid()) {
 
-        /* Date. */
+            /* Date. */
             int day = startDate.getDayOfMonth();
             int month = startDate.getMonth();
             int year = startDate.getYear();
@@ -70,14 +74,13 @@ public class NewPactActivity extends AppCompatActivity {
             int month2 = endDate.getMonth();
             int year2 = endDate.getYear();
             Calendar calendar2 = Calendar.getInstance();
-            calendar.set(year2, month2, day2);
+            calendar2.set(year2, month2, day2);
             Date end = calendar2.getTime();
 
             String habit = habitField.getText().toString();
             int length = day2 - day;
             int stakes = Integer.parseInt(stakesField.getText().toString());
             String partnerName = partnerField.getText().toString();
-
 
             Pact newPact = new Pact(
                     habit,
@@ -90,29 +93,53 @@ public class NewPactActivity extends AppCompatActivity {
             NetworkManager.createPact(newPact, mContext, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    Toast.makeText(mContext, "Successfully created pact.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Successfully created pact.", LENGTH_SHORT).show();
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(mContext, "Network error.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Network error.", LENGTH_SHORT).show();
                 }
             });
 
             finish();
         } else {
-            Toast.makeText(mContext, "Please properly complete the entire form!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, errorMessage, LENGTH_SHORT).show();
         }
     }
 
     private boolean isFormValid() {
         boolean valid = true;
+
+        /* Date validity. */
+        int day = startDate.getDayOfMonth();
+        int month = startDate.getMonth();
+        int year = startDate.getYear();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        Date start = calendar.getTime();
+
+        int day2 = endDate.getDayOfMonth();
+        int month2 = endDate.getMonth();
+        int year2 = endDate.getYear();
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(year2, month2, day2);
+        Date end = calendar2.getTime();
+        /*                   */
+
+
         if (partnerField.getText().toString().equals("")) {
             valid = false;
+            errorMessage = "Must choose a partner!";
         } else if (stakesField.getText().toString().equals("") || Integer.parseInt(stakesField.getText().toString()) == 0) {
             valid = false;
+            errorMessage = "Stakes must not be zero or empty!";
         } else if (habitField.getText().toString().equals("")) {
             valid = false;
+            errorMessage = "Habit cannot be left blank!";
+        } else if (end.before(start)) {
+            valid = false;
+            errorMessage = "End date cannot be before start date!";
         }
         return valid;
     }

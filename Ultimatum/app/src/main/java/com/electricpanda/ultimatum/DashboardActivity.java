@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DashboardActivity extends AppCompatActivity implements PactListInteractionListener {
 
@@ -78,6 +80,7 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
     }
 
     private void fetchPacts() {
+        pactList = new ArrayList<>();
         NetworkManager.getPacts(mContext, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -100,6 +103,33 @@ public class DashboardActivity extends AppCompatActivity implements PactListInte
                             pact.optInt("length"),
                             pact.optInt("stakes"));
                     p.setUsers(arr);
+                    p.setId(pact.optString("_id"));
+                    p.setBalance(pact.optInt("balance"));
+                    p.setLeader(pact.optString("leader"));
+                    String[] sarray1 = null;
+                    String[] sarray2 = null;
+                    JSONArray jarray1 = null;
+                    JSONArray jarray2 = null;
+
+                    try {
+                        p.setFirstEntryUsername(pact.getJSONArray("allEntries").optJSONObject(0).optString("username"));                        p.setFirstEntryUsername(pact.optJSONArray("allEntries").optJSONObject(0).optString("username"));
+                        p.setSecondEntryUsername(pact.optJSONArray("allEntries").optJSONObject(1).optString("username"));
+                        jarray1 = pact.optJSONArray("allEntries").optJSONObject(0).optJSONArray("entries");
+                        jarray2 = pact.optJSONArray("allEntries").optJSONObject(1).optJSONArray("entries");
+                        sarray1 = new String[jarray1.length()];
+                        sarray2 = new String[jarray2.length()];
+                        for (int k = 0; k < jarray1.length(); k++) {
+                                sarray1[k] = jarray1.get(k).toString();
+                                sarray2[k] = jarray2.get(k).toString();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    p.setFirstEntry(sarray1);
+                    p.setSecondEntry(sarray2);
+                    p.setCreationDate(pact.optString("createDate"));
+
                     pactList.add(p);
                 }
                 mAdapter = new PactRecyclerViewAdapter(pactList, mContext, (PactListInteractionListener)mContext);
